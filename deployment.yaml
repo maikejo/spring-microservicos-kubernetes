@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-microservicos-bv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-microservicos-bv
+  template:
+    metadata:
+      labels:
+        app: spring-microservicos-bv
+    spec:
+      containers:
+        - name: spring-microservicos-bv
+          image: us.gcr.io/animal-home-care/spring-microservicos-bv:1.0.0
+          imagePullPolicy: Never
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health
+            initialDelaySeconds: 5
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health
+            initialDelaySeconds: 5
+          ports:
+            - containerPort: 8080
+          env:
+            - name: message
+              valueFrom:
+                configMapKeyRef:
+                  name: message-config
+                  key: message
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-microservicos-bv-service
+spec:
+  selector:
+    app: spring-boot
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  type: LoadBalancer
