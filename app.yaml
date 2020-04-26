@@ -1,0 +1,5 @@
+# [START runtime]
+runtime: java
+handlers:
+- url: /recebiveis
+# [END runtime]

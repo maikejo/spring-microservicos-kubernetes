@@ -22,18 +22,3 @@ kubectl get pods
 kubectl get service
 kubectl cluster-info
 kubectl delete -f deployment.yaml
-
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: spring-microservicos-bv
-spec:
-  selector:
-    app: spring-microservicos-bv
-  ports:
-    - port: 80
-      targetPort: 8080
-      protocol: TCP
-  type: LoadBalancer

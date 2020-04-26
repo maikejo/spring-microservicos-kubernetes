@@ -15,7 +15,7 @@ spec:
       containers:
         - name: spring-microservicos-bv
           image: us.gcr.io/animal-home-care/spring-microservicos-bv:1.0.0
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           readinessProbe:
             httpGet:
               port: 8080
@@ -28,17 +28,11 @@ spec:
             initialDelaySeconds: 5
           ports:
             - containerPort: 8080
-          env:
-            - name: message
-              valueFrom:
-                configMapKeyRef:
-                  name: message-config
-                  key: message
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: spring-microservicos-bv-service
+  name: spring-microservicos-bv
 spec:
   selector:
     app: spring-boot
