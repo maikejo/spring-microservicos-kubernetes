@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: spring-microservicos-bv
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: spring-microservicos-bv
@@ -14,30 +14,20 @@ spec:
     spec:
       containers:
         - name: spring-microservicos-bv
-          image: us.gcr.io/animal-home-care/spring-microservicos-bv:1.0.0
-          imagePullPolicy: Always
-          readinessProbe:
-            httpGet:
-              port: 8080
-              path: /actuator/health
-            initialDelaySeconds: 5
-          livenessProbe:
-            httpGet:
-              port: 8080
-              path: /actuator/health
-            initialDelaySeconds: 5
+          image: us.gcr.io/{ID-PROJETO-GOOGLE}/spring-microservicos-bv:latest
+          
           ports:
             - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: spring-microservicos-bv
+  name: spring-microservicos-bv-service
 spec:
   selector:
     app: spring-boot
   ports:
-    - port: 80
+    - port: 8080
       targetPort: 8080
       protocol: TCP
   type: LoadBalancer

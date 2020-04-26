@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class RecebiveisController {
 
     @Autowired
-    RecebiveisService lazyService;
+    RecebiveisService service;
 
     @GetMapping
-    public String hello() {
-        return lazyService.hello();
+    public String ola() {
+        return service.ola();
     }
 }

@@ -9,7 +9,7 @@ public class RecebiveisService {
         System.out.println("Construtor Recebiveis");
     }
 
-    public String hello() {
+    public String ola() {
         return "Micro Serviços - Recebiveis";
     }
 }
