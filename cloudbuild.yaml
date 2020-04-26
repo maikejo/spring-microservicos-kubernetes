@@ -1,8 +1,4 @@
 steps:
-  # Run the Maven build
-  - name: us.gcr.io/animal-home-care/spring-microservicos-bv
+  - name: maven:3.6.0-jdk-11-slim
     entrypoint: 'mvn'
     args: ['clean', 'install', '-DskipTests']
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us.gcr.io/animal-home-care/spring-microservicos-bv:1.0.0', '.']
-images: ['us.gcr.io/animal-home-care/spring-microservicos-bv:1.0.0']
